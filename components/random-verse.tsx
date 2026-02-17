@@ -31,7 +31,7 @@ export default function RandomVerse({ initialData }: { initialData: Verse }) {
     return (
         <div className="space-y-4">
             <VerseCard verse={data} />
-            <Button onClick={fetchRandom}>换一条</Button>
+            <Button onClick={fetchRandom} className="tracking-wider font-bold">换一条</Button>
         </div>
     )
 }
