@@ -13,7 +13,7 @@ export default function Home() {
         <>
             <Header />
 
-            <main className="max-w-3xl mx-auto p-6">
+            <main className="max-w-3/4 mx-auto p-6">
                 <Tabs defaultValue="home">
                     <TabsList className="fixed flex flex-col left-4 bottom-[30%] items-center justify-center gap-4 ">
                         <TabsTrigger value="home">首页</TabsTrigger>

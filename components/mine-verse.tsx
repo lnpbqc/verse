@@ -33,7 +33,7 @@ export default function MineVerse() {
         setData(prev => prev.filter(item => item.id !== id))
     }
     useEffect(() => {
-        async function init() {
+        async function getOwnVerse() {
             const { data } = await supabase.auth.getUser()
             const currentUser = data.user
 
@@ -43,11 +43,49 @@ export default function MineVerse() {
             }
 
             setUser(currentUser)
-            fetchMyCopies(currentUser)
+            await fetchMyCopies(currentUser)
         }
 
-        init()
+        getOwnVerse()
     }, [])
+
+    useEffect(() => {
+        async function getOwnVerse() {
+            const { data } = await supabase.auth.getUser()
+            const currentUser = data.user
+
+            if (!currentUser) {
+                setLoading(false)
+                return
+            }
+
+            setUser(currentUser)
+            await fetchMyCopies(currentUser)
+        }
+        // 防抖,false启用
+        let refreshing = true
+
+
+        function handleWheel(e: WheelEvent) {
+            console.log(123)
+            if (refreshing) return
+
+            if (window.scrollY === 0 && e.deltaY < 0) {
+                refreshing = true
+                getOwnVerse().finally(() => {
+                    setTimeout(() => {
+                        refreshing = false
+                    }, 800)
+                })
+            }
+        }
+
+        window.addEventListener("wheel", handleWheel)
+
+        return () => {
+            window.removeEventListener("wheel", handleWheel)
+        }
+    }, [user])
 
     if (loading) {
         return (
@@ -75,13 +113,13 @@ export default function MineVerse() {
     }
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 flex flex-wrap gap-6">
             {data.map(item => (
                 <div key={item.id} className="relative">
                     <VerseCard verse={item} />
 
                     <Button
-                        variant="destructive"
+                        variant="default"
                         size="sm"
                         className="absolute top-4 right-4"
                         onClick={() => handleDelete(item.id)}

@@ -62,13 +62,26 @@ export default function AllVerse({
         return () => observer.disconnect()
     }, [fetchMore])
 
+    // columns-2
+    // sm:columns-2
+    // lg:columns-3
+    // gap-y-20
+    // gap-x-20
     return (
-        <>
+        <div className="
+            w-full
+            flex
+            flex-wrap
+            justify-center
+            space-evenly
+            gap-2
+            p-2
+            ">
             {data.map(item => (
                 <VerseCard key={item.id} verse={item} />
             ))}
 
             {hasMore && <div ref={loaderRef} className="h-10" />}
-        </>
+        </div>
     )
 }

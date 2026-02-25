@@ -4,6 +4,7 @@ import { TabsContent } from "@/components/ui/tabs"
 import { motion } from "framer-motion"
 import {HoverCard, HoverCardContent, HoverCardTrigger} from "@/components/ui/hover-card";
 import {Button} from "@/components/ui/button";
+import {Separator} from "@/components/ui/separator";
 
 export default function HomeTab() {
     return (
@@ -48,6 +49,12 @@ export default function HomeTab() {
                             <Button variant="outline">更新</Button>
                         </HoverCardTrigger>
                         <HoverCardContent className="flex w-64 flex-col gap-0.5">
+                            <div className="font-semibold">@1.0.1</div>
+                            <div>Some styles have been changed.</div>
+                            <div className="text-muted-foreground mt-1 text-xs">
+                                2026/2/17
+                            </div>
+                            <Separator />
                             <div className="font-semibold">@1.0.1</div>
                             <div>Some styles have been changed.</div>
                             <div className="text-muted-foreground mt-1 text-xs">
